@@ -42,3 +42,18 @@ function getArray(amount) {
 }
 
 getArray(12)
+
+//task 3
+
+function getNameOfDay(lang, dayOfWeek) {
+  if (typeof(lang) === 'string' && typeof(dayOfWeek) === 'number' && 0 < dayOfWeek && dayOfWeek <= 7 && Number.isInteger(dayOfWeek) ) {
+    const namesOfDays = {
+      ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота' , 'Воскресенье'],
+      en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' , 'Sunday'],
+    }
+    console.log(namesOfDays[lang][dayOfWeek - 1])
+    return namesOfDays[lang][dayOfWeek - 1]
+  } else console.log('Incorrect data!!!')
+}
+
+getNameOfDay('en', 1)

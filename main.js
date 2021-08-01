@@ -57,3 +57,25 @@ function getNameOfDay(lang, dayOfWeek) {
 }
 
 getNameOfDay('en', 1)
+
+//task 4
+
+const array = [1, -1, 100, 500, [1,'c'], 'c', {}, 2]
+
+function sum(arr) {
+  if (Array.isArray(arr)) {
+    const set = new Set()
+    for (let item of arr) {
+      if (typeof(item) === 'number' && item >= 0 && Number.isInteger(item)) {
+        set.add(item)
+      }
+    }
+    if (set.size >= 4) {
+      const found = [...set].sort((item, nextItem) => item - nextItem).slice(0, 2)
+      console.log(found[0] + found[1])
+      return (found[0] + found[1])
+    }
+  }
+}
+
+sum(array)

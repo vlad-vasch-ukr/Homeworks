@@ -79,3 +79,17 @@ function sum(arr) {
 }
 
 sum(array)
+
+//task 5
+
+function translateBinary (array) {
+  let discharge = 1
+  const result =  array.reverse().reduce((res, currItem) => {
+    const gap = currItem ? res += discharge : res
+    discharge *= 2
+    return gap
+  }, 0)
+  console.log(result)
+}
+
+translateBinary([1,0,1,1,0,0,1,0,1,1,0,1,0,1,0,0,1,1,1,0,0,0,1,0,1,1,0])

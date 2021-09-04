@@ -5,8 +5,253 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@6/swiper-bundle.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header class="outlet-header">
+    <div class="o-container">
+      <div class="outlet-header__content">
+        <a href="#" class="outlet-logo">
+          <img src="img/logo.png" alt="logo" class="outlet-logo__img" draggable="false">
+        </a>
+        <div class="outlet-cart">
+          <svg class="outlet-cart__icon">
+            <use xlink:href="img/icons/sprite-symbols.svg#cart-icon"></use>
+          </svg>
+          <span class="outlet-cart__counter">3</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="o-container">
+      <section class="outlet-banner">
+        <div class="swiper-container outlet-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img class="outlet-slider__img" src="img/banners/air_pods_max_banner.jpg" draggable="false">
+              <button type="button" class="outlet-slider__button">Add to card</button>
+            </div>
+            <div class="swiper-slide">
+              <img class="outlet-slider__img" src="img/banners/airpods_pro_banner.png" draggable="false">
+              <button type="button" class="outlet-slider__button">Add to card</button>
+            </div>
+            <div class="swiper-slide">
+              <img class="outlet-slider__img" src="img/banners/apple_tv_banner.png" draggable="false">
+              <button type="button" class="outlet-slider__button">Add to card</button>
+            </div>
+            <div class="swiper-slide">
+              <img class="outlet-slider__img" src="img/banners/ipad_air_banner.jpg" draggable="false">
+              <button type="button" class="outlet-slider__button">Add to card</button>
+            </div>
+            <div class="swiper-slide">
+              <img class="outlet-slider__img" src="img/banners/iphone_12_banner.jpg" draggable="false">
+              <button type="button" class="outlet-slider__button">Add to card</button>
+            </div>
+            <div class="swiper-slide">
+              <img class="outlet-slider__img" src="img/banners/mac_book_banner.jpg" draggable="false">
+              <button type="button" class="outlet-slider__button">Add to card</button>
+            </div>
+            <div class="swiper-slide">
+              <img class="outlet-slider__img" src="img/banners/watch_banner.jpg" draggable="false">
+              <button type="button" class="outlet-slider__button">Add to card</button>
+            </div>
+          </div>
+        </div>
+        <div class="outlet-search">
+          <input type="text" placeholder="Enter device name..." class="outlet-search__input">
+          <svg class="outlet-search__search">
+            <use xlink:href="img/icons/sprite-symbols.svg#search-icon"></use>
+          </svg>
+          <div class="outlet-search__actions">
+            <div class="outlet-search__icon-wrap">
+              <svg class="outlet-search__filter outlet-search__icon">
+                <use xlink:href="img/icons/sprite-symbols.svg#filter-icon"></use>
+              </svg>
+            </div>
+            <div class="outlet-search__icon-wrap">
+              <svg class="outlet-search__settings outlet-search__icon">
+                <use xlink:href="img/icons/sprite-symbols.svg#settings-icon"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="outlet-wrapper">
+        <section class="outlet-content">
+          <div id="items" class="outlet-items menu-open row"></div>
+        </section>
+        <aside class="outlet-aside">
+          <div class="outlet-settings">
+            <div class="outlet-settings__item">
+              <input class="outlet-settings__check" type="checkbox" id="price">
+              <label for="price" class="outlet-settings__header">Price</label>
+              <div class="outlet-settings__container">
+                <div class="outlet-settings__container-wrap">
+                  <div class="outlet-settings__price">
+                    <span>From</span>
+                    <input type="number">
+                  </div>
+                  <div class="outlet-settings__price">
+                    <span>To</span>
+                    <input type="number">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="outlet-settings__item">
+              <input class="outlet-settings__check" type="checkbox" id="color">
+              <label for="color" class="outlet-settings__header">Color</label>
+              <div class="outlet-settings__container">
+                <div class="outlet-settings__container-wrap d-flex">
+                  <div class="outlet-settings__checkbox-group-wrap">
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="red">
+                      <label for="red">Red</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="black">
+                      <label for="black">Black</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="blue">
+                      <label for="blue">Blue</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="gold">
+                      <label for="gold">Gold</label>
+                    </div>
+                  </div>
+                  <div class="outlet-settings__checkbox-group-wrap">
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="green">
+                      <label for="green">Green</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="white">
+                      <label for="white">White</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="grey">
+                      <label for="grey">Grey</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="yellow">
+                      <label for="yellow">Yellow</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="outlet-settings__item">
+              <input class="outlet-settings__check" type="checkbox" id="memory">
+              <label for="memory" class="outlet-settings__header">Memory</label>
+              <div class="outlet-settings__container">
+                <div class="outlet-settings__container-wrap d-flex">
+                  <div class="outlet-settings__checkbox-group-wrap">
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="32Gb">
+                      <label for="32Gb">32 Gb</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="64Gb">
+                      <label for="64Gb">64 Gb</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="128Gb">
+                      <label for="128Gb">128 Gb</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="256Gb">
+                      <label for="256Gb">256 Gb</label>
+                    </div>
+                  </div>
+                  <div class="outlet-settings__checkbox-group-wrap">
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="512Gb">
+                      <label for="512Gb">512 Gb</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="1T">
+                      <label for="1T">1 T</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="2T">
+                      <label for="2T">2 T</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="4T">
+                      <label for="4T">4 T</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="outlet-settings__item">
+              <input class="outlet-settings__check" type="checkbox" id="os">
+              <label for="os" class="outlet-settings__header">OS</label>
+              <div class="outlet-settings__container">
+                <div class="outlet-settings__container-wrap d-flex">
+                  <div class="outlet-settings__checkbox-group-wrap">
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="ios">
+                      <label for="ios">IOS</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="mac-os">
+                      <label for="mac-os">Mac OS</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="tv-os">
+                      <label for="tv-os">tvOS</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="watch-os">
+                      <label for="watch-os">Watch OS</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="outlet-settings__item">
+              <input class="outlet-settings__check" type="checkbox" id="display">
+              <label for="display" class="outlet-settings__header">Display</label>
+              <div class="outlet-settings__container">
+                <div class="outlet-settings__container-wrap d-flex">
+                  <div class="outlet-settings__checkbox-group-wrap">
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="2-5">
+                      <label for="2-5">2 - 5 inch</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="5-7">
+                      <label for="5-7">5 - 7 inch</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="7-12">
+                      <label for="7-12">7 - 12 inch</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="12-16">
+                      <label for="12-16">12 - 16 inch</label>
+                    </div>
+                    <div class="outlet-settings__checkbox-group">
+                      <input type="checkbox" class="outlet-settings__checkbox" id="16">
+                      <label for="16">+ 16 inch</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script src="https://unpkg.com/swiper@6/swiper-bundle.min.js"></script>
+  <script src="js/items.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

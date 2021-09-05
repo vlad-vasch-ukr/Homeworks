@@ -2,11 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+	<style>
+		form {
+			width: 300px;
+		}
+		.input-item {
+			height: 45px;
+			width: 100%;
+			outline: none;
+			border-radius: 5px;
+			border: 1px solid #cccccc;
+			padding-left: 15px;
+			font-size: 16px;
+			border-bottom-width: 2px;
+			transition: all 0.3s ease;
+			margin-bottom: 10px;
+			font-weight: 700;
+		}
+		.input-item:focus {
+			border-color: #9b59b6;
+		}
+
+		.margin-zero {
+			margin-bottom: 0;
+		}
+
+		form .button {
+			height: 45px;
+			margin: 10px auto;
+		}
+		
+		form .button input {
+			height: 100%;
+			width: 50%;
+			outline: none;
+			color: #ffffff;
+			border: none;
+			background: linear-gradient(135deg, #2d5e7e, #9b59b6);
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			border-radius: 5px;
+			box-shadow: #2d5e7ea3 2.5px 3px 1px 1px;
+			position: relative;
+			transition-duration: all 0.3s easy;
+		}
+		
+		form .button input:hover {
+			background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+			box-shadow: #2d5e7ea3 2px 2.5px 1px 1px;
+			top: 2px;
+		}
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    li {
+      cursor: pointer;
+      user-select: none;
+    }
+	</style>
 </head>
 <body>
-  <script src="main.js"></script>
+	<form action="#">
+		<div class="button">
+			<input type="submit" value="Register">
+		</div>
+	</form>
+  <script src = 'script.js'></script>
 </body>
 </html>

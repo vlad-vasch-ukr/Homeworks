@@ -1,3 +1,52 @@
+//task1
+new Promise((resolve, reject) => {
+  setTimeout(()=>{
+		const number = Math.ceil(Math.random() * 6)
+		if (number !== 6) { 
+      console.log("Start the game...")
+			resolve(number)
+		} else{
+			reject("Exit")
+		} 
+	}, 2000)
+})
+.then((number) => {
+  number === 1 ? console.log('Stay here') : console.log(`Go ${number} steps`)
+})
+.catch(err => console.log('Exit', err))
+
+//task2
+const goToShop = () => {
+  const productsList = ['milk', 'bread', 'eggs', 'apple', 'potato', 'cucumber'];
+  return new Promise(resolve => resolve(productsList.length))
+}
+
+const makeDinner = () => {
+  return new Promise(resolve => {
+    setInterval(() => {
+      resolve('Bon Appetit')
+    }, 3000);
+  });
+}
+
+goToShop()
+.then(length => {
+	if (length < 4) {
+		return Promise.reject('Too low products')
+	} else {
+		return makeDinner()
+	}
+})
+.then(message => console.log(message))
+.catch(error => {throw new ProductError(error)})
+
+class ProductError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = "Product Error"
+  }
+}
+
 //task3
 class Aplication {
   constructor(settings) {

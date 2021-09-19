@@ -16,7 +16,14 @@ class Calendar {
 
   create() {
     this.#root = document.querySelector(this.#root)
-    this.#getData()
+    const savedData = localStorage.getItem('calendar')
+    if (savedData) {
+      this.#data = JSON.parse(savedData)
+      this.#createCalendarTable()
+      this.#createControl()
+    } else {
+      this.#getData()
+    }
   }
 
   #getData() {
@@ -58,7 +65,7 @@ class Calendar {
       hour.textContent = `${Calendar.#TIME_COUNTER}:00`
       tdTimeWrap.append(hour)
 
-      if (Calendar.#TIME_COUNTER !== 5) {
+      if (Calendar.#TIME_COUNTER !== 17) {
         const half = document.createElement('span')
         half.classList.add('calendar__half')
         half.textContent = `${Calendar.#TIME_COUNTER}:30`
@@ -74,9 +81,9 @@ class Calendar {
       tbody.append(row)
       Calendar.#TIME_COUNTER++
       
-      if (Calendar.#TIME_COUNTER === 13) {
-        Calendar.#TIME_COUNTER = 1
-      }
+      // if (Calendar.#TIME_COUNTER === 13) {
+      //   Calendar.#TIME_COUNTER = 1
+      // }
     }
 
     table.append(tbody)
@@ -98,17 +105,33 @@ class Calendar {
     controlTitle.classList.add('control__title')
     controlTitle.textContent = 'Create event'
 
-    const inputStart = document.createElement('input')
-    inputStart.setAttribute('type', 'number')
-    inputStart.setAttribute('placeholder', 'Start')
-    inputStart.setAttribute('min', '0')
-    inputStart.classList.add('control__start')
+    const inputStartWrap = document.createElement('div')
+    inputStartWrap.classList.add('control__start-wrap')
+
+    const inputStartHour = document.createElement('input')
+    inputStartHour.setAttribute('type', 'number')
+    inputStartHour.setAttribute('placeholder', 'H')
+    inputStartHour.setAttribute('min', '8')
+    inputStartHour.classList.add('control__start')
+
+    const inputStartMin = document.createElement('input')
+    inputStartMin.setAttribute('type', 'number')
+    inputStartMin.setAttribute('placeholder', 'M')
+    inputStartMin.setAttribute('min', '0')
+    inputStartMin.classList.add('control__start-min')
+
+    inputStartWrap.append(inputStartHour, inputStartMin)
 
     const inputDuration = document.createElement('input')
     inputDuration.setAttribute('type', 'number')
     inputDuration.setAttribute('placeholder', 'Duration')
     inputDuration.setAttribute('min', '0')
     inputDuration.classList.add('control__duration')
+
+    const inputTitle = document.createElement('input')
+    inputTitle.setAttribute('type', 'text')
+    inputTitle.setAttribute('placeholder', 'Title')
+    inputTitle.classList.add('control__input-title')
 
     const actions = document.createElement('div')
     actions.classList.add('control__actions')
@@ -129,8 +152,8 @@ class Calendar {
     reset.textContent = 'Reset'
 
     actions.append(add, save, reset)
-    control.append(controlTitle, inputStart, inputDuration, actions)
-    control.addEventListener('click', this.#controlHandler)
+    control.append(controlTitle, inputStartWrap, inputDuration, inputTitle, actions)
+    control.addEventListener('click', this.#controlHandler(control))
 
     this.#root.append(control)
   }
@@ -227,12 +250,67 @@ class Calendar {
     }
   }
 
-  #controlHandler(e) {
-    e.stopPropagation()
+  #controlHandler(elem) {
+    const control = elem
+    return (e) => {
+      e.stopPropagation()
+      const action = e.target
+      const add = action.closest('.control__add')
+      const save = action.closest('.control__save')
+      const reset = action.closest('.control__reset')
+      if (save) {
+        localStorage.setItem('calendar', JSON.stringify(this.#data))
+        alert('Saved!')
+      } if (reset) {
+        localStorage.removeItem('calendar')
+        location.reload()
+      } if (add) {
+        const inputStartHour = control.querySelector('.control__start')
+        const inputStartMin = control.querySelector('.control__start-min')
+        const inputDurationValue = control.querySelector('.control__duration')
+        const inputTitle = control.querySelector('.control__input-title')
+        const prepareHour = (inputStartHour.value - 8) * 60
+        if (prepareHour >= 0 && inputStartMin.value >=0 && +inputStartMin.value <= 60 && inputTitle.value 
+          && prepareHour + +inputStartMin.value + +inputDurationValue.value <= 540 && inputDurationValue.value > 0) {
+            const newItem = {
+              id: this.#createID(),
+              start: prepareHour + +inputStartMin.value,
+              duration: +inputDurationValue.value,
+              title: inputTitle.value
+            }
+            this.#data.push(newItem)
+            this.#data.sort((a, b) => a.start - b.start)
+            this.#prepareData()
+            this.#clearCalendar()
+            this.#createEvents()
+            inputStartHour.value = ''
+            inputStartMin.value = ''
+            inputDurationValue.value = ''
+            inputTitle.value = ''
+            console.log(newItem)
+        } else {
+          alert('Please enter correct data!')
+        }
+      }
+    }
+  }
+
+  #createID() {
+    const sorted = this.#data.sort((a, b) => b.id - a.id)
+    const maxId = sorted[0].id
+    return maxId + 1
+  }
+
+  #createNotification() {
+    const notification = document.createElement('div')
+    notification.classList.add('notification')
+
+    const notificationTitle = document.createElement('span')
+    notificationTitle.classList.add('notification__title')
   }
 
   #convertHexToRgb(hex) {
-    return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
+    return hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (r, g, b) => '#' + r + r + g + g + b + b)
     .substring(1).match(/.{2}/g)
     .map(x => parseInt(x, 16))
   }
@@ -255,6 +333,8 @@ class Calendar {
       event.style.height = item.height + 'px'
       event.style.width = item.width + 'px'
       event.style.right = item.right + 'px'
+      event.style.backgroundColor = `rgba(${this.#convertHexToRgb(item.eventColor).join()}, .5)`
+      event.style.borderLeft = `2px solid ${item.eventColor}`
 
       const tableWrap = document.querySelector('#wrap')
       tableWrap.append(event)
@@ -272,7 +352,7 @@ class Calendar {
 
         if (top >= intervalStart && top < (intervalStart + 100)) {
           if (!item.eventColor) {
-            item.eventColor = '#00f2ff'
+            item.eventColor = '#6E9ECF'
           }
 
           const newItem = Object.assign({}, item)

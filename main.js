@@ -24,6 +24,39 @@ class Calendar {
     } else {
       this.#getData()
     }
+    this.#createNotification()
+  }
+
+  #createNotification() {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification")
+    }
+
+    if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        if (permission === 'granted') {
+          new Notification('Welcome to the JSModule!')
+        } else if (permission === 'denied') {
+          alert('Please turn on notifications!')
+        }
+      })
+    }
+
+    const link = this.#data
+
+    setTimeout( function findCurrentEvent() {
+      for (const item of link) {
+        const hours = Math.floor(item.start / 60) 
+        const eventTime = `${hours + 8} ${item.start - hours * 60} 0`
+        const date = new Date()
+        const currentTime = `${date.getHours()} ${date.getMinutes()} ${date.getSeconds()}`
+
+        if (eventTime === currentTime) {
+          new Notification(`Event "${item.title}" started!`)
+        }
+      }
+      setTimeout(findCurrentEvent, 1000)
+    }, 1000)
   }
 
   #getData() {
@@ -287,7 +320,6 @@ class Calendar {
             inputStartMin.value = ''
             inputDurationValue.value = ''
             inputTitle.value = ''
-            console.log(newItem)
         } else {
           alert('Please enter correct data!')
         }
@@ -301,12 +333,19 @@ class Calendar {
     return maxId + 1
   }
 
-  #createNotification() {
-    const notification = document.createElement('div')
-    notification.classList.add('notification')
+  // #createNotification() {
+  //   const notification = document.createElement('div')
+  //   notification.classList.add('notification')
 
-    const notificationTitle = document.createElement('span')
-    notificationTitle.classList.add('notification__title')
+  //   const notificationTitle = document.createElement('span')
+  //   notificationTitle.classList.add('notification__title')
+
+  //   notification.append(notificationTitle)
+  //   notification
+  // }
+
+  #notificationHandler() {
+
   }
 
   #convertHexToRgb(hex) {

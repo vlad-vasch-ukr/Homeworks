@@ -21,10 +21,10 @@ class Calendar {
       this.#data = JSON.parse(savedData)
       this.#createCalendarTable()
       this.#createControl()
+      this.#createNotification()
     } else {
-      this.#getData()
+      this.#getData().then(() => this.#createNotification())
     }
-    this.#createNotification()
   }
 
   #createNotification() {
@@ -60,7 +60,7 @@ class Calendar {
   }
 
   #getData() {
-    fetch(this.#path)
+    return fetch(this.#path)
       .then((data) => data.json())
       .then((data) => this.#data = data)
       .then(() => {
@@ -331,21 +331,6 @@ class Calendar {
     const sorted = this.#data.sort((a, b) => b.id - a.id)
     const maxId = sorted[0].id
     return maxId + 1
-  }
-
-  // #createNotification() {
-  //   const notification = document.createElement('div')
-  //   notification.classList.add('notification')
-
-  //   const notificationTitle = document.createElement('span')
-  //   notificationTitle.classList.add('notification__title')
-
-  //   notification.append(notificationTitle)
-  //   notification
-  // }
-
-  #notificationHandler() {
-
   }
 
   #convertHexToRgb(hex) {

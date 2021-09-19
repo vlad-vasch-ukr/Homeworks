@@ -435,7 +435,7 @@ class Calendar {
     
     subIntervals.forEach(item => {
       const affiliation = intervals.find(obj => obj.id === item.affiliation[0])
-      item.width = item.affiliation.length * affiliation.width
+      item.width = affiliation.width
       item.right = affiliation.right
     })
 
